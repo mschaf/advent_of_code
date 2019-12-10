@@ -8,7 +8,12 @@ module Day5
       computer.input(1)
       computer.run
 
-      return computer.output
+      output = 0
+      until output != 0
+        output = computer.output
+      end
+
+      return output
     end
 
   end

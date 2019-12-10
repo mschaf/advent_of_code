@@ -30,7 +30,7 @@ class IntCodeComputer
   end
 
   def output
-    @output.pop
+    @output.shift
   end
 
   def run
@@ -108,7 +108,7 @@ class IntCodeComputer
       debug("no input present: pausing execution")
       set_state :waiting_for_input
     else
-      input = @input.pop
+      input = @input.shift
       write_address = @program[program_counter + 1]
       debug "writing #{input} to #{write_address}", level: 2
       write_at write_address, input
