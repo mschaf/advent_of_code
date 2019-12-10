@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+day = ARGV[0]
+
+Dir.mkdir "lib/day_#{day}"
+Dir.mkdir "spec/day_#{day}"
+
+File.write "input/day_#{day}.txt", ""
+
+[1, 2].each do |part|
+  File.write "lib/day_#{day}/part_#{part}.rb",
+"""module Day#{day}
+  module Part#{part}
+
+    def self.run(input)
+
+    end
+
+  end
+end
+
+"""
+
+  File.write "spec/day_#{day}/part_#{part}.rb",
+"""RSpec.describe 'Day #{day}' do
+
+  describe 'Part #{part}' do
+    it 'has a solution' do
+      expect(Runner.run_part(#{day}, #{part})).to eq 0
+    end
+  end
+
+end
+
+"""
+end
