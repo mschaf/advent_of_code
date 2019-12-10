@@ -21,7 +21,7 @@ end
 
 """
 
-  File.write "spec/day_#{day}/part_#{part}.rb",
+  File.write "spec/day_#{day}/part_#{part}_spec.rb",
 """RSpec.describe 'Day #{day}' do
 
   describe 'Part #{part}' do
