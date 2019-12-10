@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+lib = File.expand_path("../lib", __dir__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+
+require 'environment'
+
+Runner.run(day: ARGV[0]&.to_i, part: ARGV[1]&.to_i)
