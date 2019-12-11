@@ -36,7 +36,7 @@ module Day10
           best_location = possible_location
         end
       end
-      
+
       return most_visible
     end
 
