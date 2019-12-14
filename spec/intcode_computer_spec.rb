@@ -22,7 +22,7 @@ RSpec.describe 'IntCodeComputer' do
           computer.input i
         end
         computer.run
-        expect(computer.all_outputs).to eq expected_output
+        expect(computer.output_buffer).to eq expected_output
       end
     end
 

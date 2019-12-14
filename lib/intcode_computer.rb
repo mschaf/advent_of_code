@@ -1,6 +1,6 @@
 class IntCodeComputer
 
-  attr_reader :state
+  attr_accessor :state
   attr_reader :program_counter
   attr_reader :program
   attr_reader :input
@@ -34,7 +34,7 @@ class IntCodeComputer
     @output.shift
   end
 
-  def all_outputs
+  def output_buffer
     @output
   end
 
@@ -43,6 +43,17 @@ class IntCodeComputer
     while @state == :running
       step
     end
+  end
+
+  def step
+    set_state :running
+    optcode = @program[@program_counter] % 100
+    instruction = @instructions[optcode]
+    unless instruction
+      raise "Instruction with #{optcode} not found"
+    end
+    debug("executing #{@program[@program_counter]} (#{instruction[:name]}) at #{@program_counter}", level: 1)
+    send(instruction[:method])
   end
 
   private
@@ -93,16 +104,6 @@ class IntCodeComputer
       value
     end
     values.one? ? values.first : values
-  end
-
-  def step
-    optcode = @program[@program_counter] % 100
-    instruction = @instructions[optcode]
-    unless instruction
-      raise "Instruction with #{optcode} not found"
-    end
-    debug("executing #{@program[@program_counter]} (#{instruction[:name]}) at #{@program_counter}", level: 1)
-    send(instruction[:method])
   end
 
   def instruction_1_add
